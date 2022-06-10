@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<!-- 
+  1. app.message修改数据. Vue内部是如何监听message数据的改变
+    * Object.defineProperty -> 监听对象属性的改变
+  
+  2. 当数据发生改变，Vue是如何知道要通知那些人，界面发生刷新
+    * 发布订阅者模式
+ -->
+
+<body>
+  <div id="app">
+    {{ message }} // 张三
+    {{ message }} // 李四
+    {{ message }} // 王五
+
+    {{ name }}
+  </div>
+
+  <script>
+    const obj = {
+      message: '喜欢你！',
+      name: 'xsy'
+    }
+
+    Object.keys(obj).forEach(key => {
+      let value = obj[key];
+      Object.defineProperty(obj, key, {
+        set(newValue) {
+          console.log('监听' + key + '改变');
+          // 告诉谁了? 谁用告诉谁? 谁在用了?
+          // 根据解析html代码，获取到那些人有用属性
+          // 张三/李四/王五
+          value = newValue;
+
+          // dep.notify();
+        },
+        get() {
+          console.log('获取' + key + '对应的值');
+          // 张三: get -> update
+          // 李四: get -> update
+          // 王五: get -> update
+          return value;
+        }
+      });
+    });
+
+    // obj.name = 'kobe';
+
+    // 发布者订阅者
+    // 发布者
+    class Dep {
+      constructor() {
+        this.subs = []
+      }
+
+      addSub(watcher) {
+        this.subs.push(watcher);
+      }
+
+      notify() {
+        this.subs.forEach(item => {
+          item.update();
+        })
+      }
+    }
+
+    // 订阅者
+    class watcher {
+      constructor(name) {
+        this.name = name;
+      }
+
+      update() {
+        console.log(this.name + '发生update');
+      }
+    }
+
+    const dep = new Dep();
+
+    const w1 = new watcher('张三');
+    dep.addSub(w1)
+
+    const w2 = new watcher('李四');
+    dep.addSub(w2)
+
+    const w3 = new watcher('王五');
+    dep.addSub(w3)
+
+    dep.notify();
+  </script>
+
+  <script src="../开发环境Vue文件/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '喜欢你！',
+        name: 'xsy'
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <cpn1></cpn1>
+    <cpn2></cpn2>
+    <cpn3></cpn3>
+  </div>
+
+  <script src="../开发环境Vue文件/vue.js"></script>
+  <script>
+    // 1. 全局组件注册的用法糖
+    // 1. 创建组件构造器
+    // const cpn1 = Vue.extent();
+    // 2.
+    Vue.component('cpn1', {
+      template: `
+      <div>
+        <h2>我是标题2</h2>
+        <p>我是内容: 的撒发就好使</p> 
+      </div>
+      `
+    });
+
+    // 2. 注册局部组件的用法糖
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好啊'
+      },
+      components: {
+        cpn2: {
+          template: `
+            <div>
+              <h2>我是标题2</h2>
+              <p>我是内容: 阿技术的空间和</p> 
+            </div>
+              `   
+        },
+        cpn3: {
+          template: `
+            <div>
+              <h2>我是标题3</h2>
+              <p>我是内容: aaaaaa</p> 
+            </div>
+          `
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

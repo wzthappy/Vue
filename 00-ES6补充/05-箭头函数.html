@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    // 1. 箭头函数: 也是一种定义函数的方式
+    const aaa = function () {
+
+    }
+
+    // 2. 对象字面量中定义函数
+    const obj = {
+      bbb: function () {
+
+      },
+      ccc() {
+
+      }
+    }
+
+    // 3. ES6中的箭头函数
+    // const ccc = (参数列表) => {}
+    const ccc = () => { }
+    // 1. 参数问题
+    // 1.1 放入两个参数
+    const sum = (num1, num2) => {
+      return num1 + num2
+    }
+
+    // 1.2 放入一个参数
+    const power = num => {
+      return num * num
+    }
+
+    // 2. 函数中
+    // 2.1 函数代码块中右多个代码时 
+    const test = () => {
+      // 1. 打印 Hello World 
+      console.log('Hello World');
+
+      // 2. 打印 Hello Vuejs
+      console.log('Hello Vuejs');
+    }
+
+    // 2.2 函数代码块中只有一行代码
+    //  const mul = (um1, um2) => {
+    //    return num1 * num2
+    //  }
+    const mul = (um1, um2) => um1 * um2
+    console.log(mul(20, 30));
+
+    const demo = () => console.log('Hello Demo');
+    demo()
+    console.log(demo());
+
+
+    // 什么时候使用箭头
+    // setTimeout(function () {
+    //   console.log(this);
+    // }, 1000)
+
+    // setTimeout(() => {
+    //   console.log(this);
+    // }, 1000);
+
+    // 结论: 箭头的函数中的this引用的就是最近作用域中的this
+    // const obj2 = {
+    //   aaa() {
+    //    setTimeout(function () {
+    //      console.log(this);  // window
+    //    }, 1000);
+
+    //    setTimeout(() => {
+    //      console.log(this);  // obj
+    //    }, 2000);
+
+    //   }
+    // }
+
+    const obj2 = {
+      aaa() {
+        setTimeout(function () {
+          setTimeout(function () {
+            console.log(this);  // window
+          });
+          
+          setTimeout(() => {
+            console.log(this);  // window
+          });
+        }, 1000);
+
+        setTimeout(() => {
+          setTimeout(function () {
+            console.log(this);  // window
+          });
+
+          setTimeout(() => {
+            console.log(this);  // obj
+          });
+        }, 2000);
+
+      }
+    }
+
+    obj2.aaa();
+  </script>
+</body>
+
+</html>

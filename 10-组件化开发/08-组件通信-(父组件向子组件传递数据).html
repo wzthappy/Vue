@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <div id="app">
+    <cpn :aaa="movies" :cmovies="message"></cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <h2 v-for="item in aaa">{{item}}</h2>
+      {{cmovies}}
+    </div>
+  </template>
+
+  <script src="../开发环境Vue文件/vue.js"></script>
+  <script>
+    // 父传子: props
+    const cpn = {
+      template: '#cpn',
+      // data() {
+      //   return {}
+      // },
+      // props: ['cmovies', 'aaa'],
+      props: {
+        // 1. 类型的限制
+        // aaa: Array,
+        // cmovies: String
+
+        // 2. 提供一些默认值, 以及必传值
+        cmovies: {
+          type: String,
+          default: '我是默认值',
+          required: true
+        },
+        aaa: {
+          type: Array,
+          default() {
+            return []
+          }
+        }
+      }
+    }
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好啊',
+        movies: ['dsad', '四大', '水电费']
+      },
+      components: {
+        cpn
+      }
+    });
+  </script>
+</body>
+</html>

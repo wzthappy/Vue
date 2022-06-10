@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <cpn><span slot="left">标题</span></cpn>
+    <cpn>
+      <button slot="center">返回</button>
+      <span slot="right">来来来</span>
+    </cpn>
+      
+  </div>
+
+  <template id="cpn">
+    <div>
+      <slot name="left">左边</slot>
+      <slot name="center">中间</slot>
+      <slot name="right">右边</slot>
+    </div>
+  </template>
+
+  <script src="../开发环境Vue文件/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好啊'
+      },
+      components: {
+        cpn: {
+          template: '#cpn'
+        }
+      }
+    });
+  </script>
+</body>
+</html>

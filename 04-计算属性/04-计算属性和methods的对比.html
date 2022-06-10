@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 1. 直接拼接: 语法过于繁琐 -->
+    <!-- <h2>{{firsName}} {{lastName}}</h2> -->
+
+    <!-- 2. 通过定义methods -->
+    <!-- <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2> -->
+
+    <!-- 3. 通过computed -->
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+  </div>
+
+  <script src="../开发环境Vue文件/vue.js"></script>
+  <script>
+    // TypeScript(microsoft) -> ts(类型检测)
+    // flow(facebook) -> 
+    const app = new Vue({
+      el: '#app',
+      data: {
+        firsName: 'kode',
+        lastName: 'Bryant'
+      },
+      methods: {
+        getFullName: function () {
+          console.log('getFullName');
+          return this.firsName + ' ' + this.lastName;
+        }
+      },
+      computed: {
+        fullName: function () {
+          console.log('fullName');
+          return this.firsName + ' ' + this.lastName;
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

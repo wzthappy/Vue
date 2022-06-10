@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h2 v-if="isShow">
+      <div>asasa</div>
+      <div>asasa</div>
+      <div>asasa</div>
+      {{message}}
+    </h2> 
+    <h1 v-else>isShow为false时，显示我</h1>
+  </div>
+
+  <script src="../开发环境Vue文件/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好啊',
+        isShow: true
+      }
+    });
+  </script>
+</body>
+</html>
